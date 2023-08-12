@@ -1,11 +1,11 @@
 package routes
 
 import (
-	"fmt"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Welcome to Togglr!\n")
+func HomeHandler(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "Welcome to Togglr!",
+	})
 }
