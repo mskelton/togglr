@@ -6,7 +6,7 @@ export default async function FlagList() {
 
   return (
     <div className="col-start-1 col-end-3">
-      <FlagsTable flags={flags}></FlagsTable>
+      <FlagsTable flags={flags} />
     </div>
   )
 }

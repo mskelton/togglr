@@ -1,6 +1,5 @@
 'use client'
 
-import { Flag } from '@/app/api/flags'
 import {
   Code,
   Link,
@@ -11,9 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react'
-import React, { Key } from 'react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
+import React, { Key } from 'react'
+import { Flag } from '@/app/api/flags'
 
 const columns = [
   { key: 'name', label: 'NAME' },
@@ -29,7 +29,7 @@ const renderCell = (flag: Flag, columnKey: Key) => {
   switch (columnKey) {
     case 'name':
       return (
-        <Link size="sm" as={NextLink} href={`/flags/${flag.slug}`}>
+        <Link as={NextLink} href={`/flags/${flag.slug}`} size="sm">
           {cellValue}
         </Link>
       )
@@ -57,8 +57,8 @@ export default function FlagsTable({ flags }: FlagsTableProps) {
     <Table
       aria-labelledby="#page-title"
       onRowAction={(slug) => push(`/flags/${slug}`)}
-      selectionMode="single"
       selectionBehavior="toggle"
+      selectionMode="single"
     >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}

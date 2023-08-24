@@ -1,15 +1,15 @@
 'use client'
 
-import { useSelectedLayoutSegment } from 'next/navigation'
 import {
+  Button,
+  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Button,
-  Link,
 } from '@nextui-org/react'
 import NextLink from 'next/link'
+import { useSelectedLayoutSegment } from 'next/navigation'
 import TogglrLogo from '../components/TogglrLogo'
 
 const items = [
@@ -21,7 +21,7 @@ export default function AdminNav() {
   const segment = useSelectedLayoutSegment()
 
   return (
-    <Navbar maxWidth="full" isBordered>
+    <Navbar isBordered maxWidth="full">
       <NavbarBrand>
         <TogglrLogo />
         <p className="font-bold text-inherit">Togglr</p>
@@ -30,10 +30,10 @@ export default function AdminNav() {
         {items.map((item) => (
           <NavbarItem key={item.href} isActive={segment === item.href}>
             <Link
+              aria-current={segment === item.href ? 'page' : undefined}
               as={NextLink}
               color={segment === item.href ? 'primary' : 'foreground'}
               href={`/${item.href}`}
-              aria-current={segment === item.href ? 'page' : undefined}
             >
               {item.label}
             </Link>

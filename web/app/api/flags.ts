@@ -31,7 +31,7 @@ export function getFlag(slug: string): Promise<Flag> {
 
 export type CreateFlagRequest = Pick<
   Flag,
-  'name' | 'slug' | 'description' | 'enabled' | 'type'
+  'description' | 'enabled' | 'name' | 'slug' | 'type'
 >
 
 export function createFlag(flag: CreateFlagRequest): Promise<Flag> {

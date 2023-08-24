@@ -1,12 +1,12 @@
-import { Select, SelectItem, Input, Textarea } from '@nextui-org/react'
+import { Input, Select, SelectItem, Textarea } from '@nextui-org/react'
 import slugify from '@sindresorhus/slugify'
 import React, { useRef, useState } from 'react'
 
 const typeOptions = [
-  { value: 'bool', label: 'Boolean' },
-  { value: 'number', label: 'Number' },
-  { value: 'string', label: 'String' },
-  { value: 'json', label: 'JSON' },
+  { label: 'Boolean', value: 'bool' },
+  { label: 'Number', value: 'number' },
+  { label: 'String', value: 'string' },
+  { label: 'JSON', value: 'json' },
 ]
 
 export default function AddFlagFields() {
@@ -16,25 +16,25 @@ export default function AddFlagFields() {
   return (
     <>
       <Input
-        name="name"
         autoFocus
         label="Name"
-        variant="bordered"
+        name="name"
         onChange={(e) => {
           if (!slugChanged.current) {
             setSlug(slugify(e.target.value))
           }
         }}
+        variant="bordered"
       />
       <Input
-        name="slug"
-        value={slug}
         label="Slug"
-        variant="bordered"
+        name="slug"
         onChange={(e) => {
           setSlug(e.target.value)
           slugChanged.current = true
         }}
+        value={slug}
+        variant="bordered"
       />
       <Select
         defaultSelectedKeys={['bool']}
@@ -49,7 +49,7 @@ export default function AddFlagFields() {
           </SelectItem>
         )}
       </Select>
-      <Textarea name="description" label="Description" variant="bordered" />
+      <Textarea label="Description" name="description" variant="bordered" />
     </>
   )
 }

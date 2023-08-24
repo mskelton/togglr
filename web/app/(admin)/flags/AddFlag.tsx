@@ -10,8 +10,8 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react'
-import { addFlag } from './actions'
 import Submit from '../components/Submit'
+import { addFlag } from './actions'
 import AddFlagFields from './AddFlagFields'
 
 export default function AddFlag() {
@@ -22,8 +22,8 @@ export default function AddFlag() {
       <Button
         className="justify-self-end"
         color="primary"
-        startContent={<PlusIcon className="w-5 h-5" />}
         onPress={onOpen}
+        startContent={<PlusIcon className="w-5 h-5" />}
       >
         Add Flag
       </Button>
@@ -46,7 +46,7 @@ export default function AddFlag() {
               </ModalBody>
 
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color="danger" onPress={onClose} variant="flat">
                   Close
                 </Button>
 
