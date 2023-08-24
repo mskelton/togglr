@@ -13,6 +13,7 @@ import {
 } from '@nextui-org/react'
 import React, { Key } from 'react'
 import NextLink from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const columns = [
   { key: 'name', label: 'NAME' },
@@ -50,8 +51,15 @@ export interface FlagsTableProps {
 }
 
 export default function FlagsTable({ flags }: FlagsTableProps) {
+  const { push } = useRouter()
+
   return (
-    <Table aria-labelledby="#page-title">
+    <Table
+      aria-labelledby="#page-title"
+      onRowAction={(slug) => push(`/flags/${slug}`)}
+      selectionMode="single"
+      selectionBehavior="toggle"
+    >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
@@ -63,7 +71,7 @@ export default function FlagsTable({ flags }: FlagsTableProps) {
         items={flags}
       >
         {(item) => (
-          <TableRow key={item.slug}>
+          <TableRow key={item.slug} className="cursor-pointer">
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
