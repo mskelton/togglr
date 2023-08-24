@@ -10,6 +10,5 @@ Togglr is built using Go, which provides an extremely good concurrency model
 with goroutines that allows us to perform efficient processing of incoming
 requests.
 
-Togglr uses MongoDB for data storage which is highly scalable and efficient for
-data reads. On top of MonoDB, Redis is used for caching flag states and
-variations to cache flag variations for fast reads.
+Togglr uses Postgres with a Redis caching layer on top for storing flag states
+and variations for super fast reading of flags.

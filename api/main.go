@@ -9,20 +9,26 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/mskelton/togglr/pkg/middleware"
+	"github.com/mskelton/togglr/pkg/models"
 	"github.com/mskelton/togglr/pkg/routes"
 )
 
 func main() {
-	router := gin.Default()
-	router.Use(middleware.NoCache())
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found")
+	}
 
+	router := gin.Default()
+	router.Use(middleware.NoCache)
 	router.GET("/", routes.HomeHandler)
+
 	router.GET("/flags", routes.ListFlagsHandler)
-	router.GET("/flags/:id", routes.GetFlagHandler)
+	router.GET("/flags/:slug", routes.GetFlagHandler)
 	router.POST("/flags", routes.CreateFlagHandler)
-	router.PATCH("/flags/:id", routes.UpdateFlagHandler)
-	router.DELETE("/flags/:id", routes.DeleteFlagHandler)
+	router.PATCH("/flags/:slug", routes.UpdateFlagHandler)
+	router.DELETE("/flags/:slug", routes.DeleteFlagHandler)
 
 	srv := &http.Server{
 		Addr:         "127.0.0.1:8080",
@@ -32,10 +38,12 @@ func main() {
 		Handler:      router,
 	}
 
-	gracefulShutdown(srv)
+	gracefulShutdown(srv, func() {
+		models.Close()
+	})
 }
 
-func gracefulShutdown(srv *http.Server) {
+func gracefulShutdown(srv *http.Server, onClose func()) {
 	// Start the server in a new goroutine so that it doesn't block.
 	go func() {
 		if err := srv.ListenAndServe(); err != nil {
@@ -51,6 +59,9 @@ func gracefulShutdown(srv *http.Server) {
 
 	// Block until we receive our signal.
 	<-c
+
+	// Run additional cleanup tasks
+	onClose()
 
 	// Create a deadline to wait for.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
