@@ -3,22 +3,19 @@
 import { PlusIcon } from '@heroicons/react/24/solid'
 import {
   Button,
-  Checkbox,
-  Input,
-  Link,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Textarea,
   useDisclosure,
 } from '@nextui-org/react'
-import { useState } from 'react'
+import { addFlag } from './actions'
+import Submit from '../components/Submit'
+import AddFlagFields from './AddFlagFields'
 
 export default function AddFlag() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [slug, setSlug] = useState('')
 
   return (
     <>
@@ -34,19 +31,18 @@ export default function AddFlag() {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
-            <>
+            <form
+              action={async (formData) => {
+                await addFlag(formData)
+                onClose()
+              }}
+            >
               <ModalHeader className="flex flex-col gap-1">
                 Add Flag
               </ModalHeader>
 
               <ModalBody>
-                <Input name="name" autoFocus label="Name" variant="bordered" />
-                <Input name="slug" label="Slug" variant="bordered" />
-                <Textarea
-                  name="description"
-                  label="Description"
-                  variant="bordered"
-                />
+                <AddFlagFields />
               </ModalBody>
 
               <ModalFooter>
@@ -54,11 +50,9 @@ export default function AddFlag() {
                   Close
                 </Button>
 
-                <Button color="primary" onPress={onClose}>
-                  Save
-                </Button>
+                <Submit color="primary">Save</Submit>
               </ModalFooter>
-            </>
+            </form>
           )}
         </ModalContent>
       </Modal>

@@ -18,14 +18,23 @@ export interface GetFlagsResponse {
 }
 
 export function getFlags(): Promise<GetFlagsResponse> {
-  return req.get('/flags')
+  return req.get('/flags', {
+    next: {
+      tags: ['flags'],
+    },
+  })
 }
 
 export function getFlag(slug: string): Promise<Flag> {
   return req.get(`/flags/${slug}`)
 }
 
-export function createFlag(flag: Flag): Promise<Flag> {
+export type CreateFlagRequest = Pick<
+  Flag,
+  'name' | 'slug' | 'description' | 'enabled' | 'type'
+>
+
+export function createFlag(flag: CreateFlagRequest): Promise<Flag> {
   return req.post('/flags', flag)
 }
 

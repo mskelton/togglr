@@ -15,7 +15,7 @@ const (
 )
 
 type Flag struct {
-	Slug        string         `json:"slug" gorm:"primaryKey"`
+	Slug        string         `json:"slug" gorm:"primaryKey;unique;not null;default:null"`
 	CreatedAt   time.Time      `json:"createdAt"`
 	UpdatedAt   time.Time      `json:"updatedAt"`
 	DeletedAt   gorm.DeletedAt `json:"deletedAt" gorm:"index"`

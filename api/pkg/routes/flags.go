@@ -25,18 +25,32 @@ func GetFlagHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, flag)
 }
 
+type CreateFlagRequest struct {
+	Slug        string          `json:"slug" binding:"required"`
+	Name        string          `json:"name" binding:"required"`
+	Type        models.FlagType `json:"type" binding:"required"`
+	Description string          `json:"description"`
+}
+
 func CreateFlagHandler(c *gin.Context) {
-	var flag models.Flag
-	if err := c.BindJSON(&flag); err != nil {
+	var data CreateFlagRequest
+	if err := c.ShouldBindJSON(&data); err != nil {
 		c.Error(err)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "failed to parse request body"})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
+	}
+
+	flag := models.Flag{
+		Slug:        data.Slug,
+		Name:        data.Name,
+		Type:        data.Type,
+		Description: data.Description,
 	}
 
 	tx := models.DB.Create(&flag)
 	if tx.Error != nil {
 		c.Error(tx.Error)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "failed to create flag"})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": tx.Error.Error()})
 		return
 	}
 
@@ -45,7 +59,7 @@ func CreateFlagHandler(c *gin.Context) {
 
 func UpdateFlagHandler(c *gin.Context) {
 	var body models.Flag
-	if err := c.BindJSON(&body); err != nil {
+	if err := c.ShouldBindJSON(&body); err != nil {
 		c.Error(err)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "failed to parse request body"})
 		return
