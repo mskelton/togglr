@@ -4,7 +4,7 @@ import AddFlag from './AddFlag'
 import FlagList from './FlagList'
 
 export const metadata: Metadata = {
-  title: 'Flags',
+  title: 'Flags | Togglr',
 }
 
 export default function Page() {

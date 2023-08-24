@@ -1,12 +1,21 @@
 import { getFlag } from '@/app/api/flags'
 import PageTitle from '@/app/components/PageTitle'
-import { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: 'Flags',
+interface PageProps {
+  params: {
+    slug: string
+  }
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: PageProps) {
+  const flag = await getFlag(params.slug)
+
+  return {
+    title: `${flag.name} | Togglr`,
+  }
+}
+
+export default async function Page({ params }: PageProps) {
   const flag = await getFlag(params.slug)
 
   return (
