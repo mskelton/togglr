@@ -1,6 +1,6 @@
-import { req } from './req'
+import { req } from "./req"
 
-export type FlagType = 'boolean' | 'number' | 'string'
+export type FlagType = "boolean" | "number" | "string"
 
 export interface Flag {
   createdAt: string
@@ -18,9 +18,9 @@ export interface GetFlagsResponse {
 }
 
 export function getFlags(): Promise<GetFlagsResponse> {
-  return req.get('/flags', {
+  return req.get("/flags", {
     next: {
-      tags: ['flags'],
+      tags: ["flags"],
     },
   })
 }
@@ -31,15 +31,22 @@ export function getFlag(slug: string): Promise<Flag> {
 
 export type CreateFlagRequest = Pick<
   Flag,
-  'description' | 'enabled' | 'name' | 'slug' | 'type'
+  "description" | "enabled" | "name" | "slug" | "type"
 >
 
 export function createFlag(flag: CreateFlagRequest): Promise<Flag> {
-  return req.post('/flags', flag)
+  return req.post("/flags", flag)
 }
 
-export function updateFlag(flag: Flag): Promise<Flag> {
-  return req.put(`/flags/${flag.slug}`, flag)
+export type UpdateFlagRequest = Partial<
+  Pick<Flag, "description" | "enabled" | "name">
+> & { slug: string }
+
+export function updateFlag({
+  slug,
+  ...flag
+}: UpdateFlagRequest): Promise<Flag> {
+  return req.put(`/flags/${slug}`, flag)
 }
 
 export function deleteFlag(slug: string): Promise<void> {

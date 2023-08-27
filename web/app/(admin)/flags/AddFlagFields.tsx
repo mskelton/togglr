@@ -1,21 +1,16 @@
-import { Input, Select, SelectItem, Textarea } from '@nextui-org/react'
-import slugify from '@sindresorhus/slugify'
-import React, { useRef, useState } from 'react'
-
-const typeOptions = [
-  { label: 'Boolean', value: 'bool' },
-  { label: 'Number', value: 'number' },
-  { label: 'String', value: 'string' },
-  { label: 'JSON', value: 'json' },
-]
+import { Input, Select, SelectItem, Textarea } from "@nextui-org/react"
+import slugify from "@sindresorhus/slugify"
+import React, { useRef, useState } from "react"
+import { flagTypes } from "../types/flag"
 
 export default function AddFlagFields() {
   const slugChanged = useRef(false)
-  const [slug, setSlug] = useState('')
+  const [slug, setSlug] = useState("")
 
   return (
     <>
       <Input
+        autoComplete="off"
         autoFocus
         label="Name"
         name="name"
@@ -37,8 +32,8 @@ export default function AddFlagFields() {
         variant="bordered"
       />
       <Select
-        defaultSelectedKeys={['bool']}
-        items={typeOptions}
+        defaultSelectedKeys={["bool"]}
+        items={flagTypes}
         label="Type"
         name="type"
         variant="bordered"

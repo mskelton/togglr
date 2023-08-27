@@ -1,5 +1,5 @@
-import { getFlags } from '@/app/api/flags'
-import FlagsTable from './FlagsTable'
+import { getFlags } from "@/app/api/flags"
+import FlagsTable from "./FlagsTable"
 
 export default async function FlagList() {
   const { flags } = await getFlags()

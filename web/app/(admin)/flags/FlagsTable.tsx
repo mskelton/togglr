@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   Code,
@@ -9,37 +9,37 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react'
-import NextLink from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { Key } from 'react'
-import { Flag } from '@/app/api/flags'
+} from "@nextui-org/react"
+import NextLink from "next/link"
+import { useRouter } from "next/navigation"
+import React, { Key } from "react"
+import { Flag } from "@/app/api/flags"
 
 const columns = [
-  { key: 'name', label: 'NAME' },
-  { key: 'slug', label: 'SLUG' },
-  { key: 'enabled', label: 'ENABLED' },
-  { key: 'description', label: 'DESCRIPTION' },
-  { key: 'updatedAt', label: 'LAST UPDATED' },
+  { key: "name", label: "NAME" },
+  { key: "slug", label: "SLUG" },
+  { key: "enabled", label: "ENABLED" },
+  { key: "description", label: "DESCRIPTION" },
+  { key: "updatedAt", label: "LAST UPDATED" },
 ]
 
 const renderCell = (flag: Flag, columnKey: Key) => {
   const cellValue = flag[columnKey as keyof Flag]
 
   switch (columnKey) {
-    case 'name':
+    case "name":
       return (
         <Link as={NextLink} href={`/flags/${flag.slug}`} size="sm">
           {cellValue}
         </Link>
       )
-    case 'slug':
+    case "slug":
       return <Code>{cellValue}</Code>
-    case 'enabled':
-      return flag.enabled ? 'Yes' : 'No'
-    case 'updatedAt':
+    case "enabled":
+      return flag.enabled ? "Yes" : "No"
+    case "updatedAt":
       return new Date(cellValue as string).toLocaleDateString(undefined, {
-        dateStyle: 'medium',
+        dateStyle: "medium",
       })
     default:
       return cellValue

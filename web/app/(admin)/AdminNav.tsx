@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   Button,
@@ -7,14 +7,14 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from '@nextui-org/react'
-import NextLink from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
-import TogglrLogo from '../components/TogglrLogo'
+} from "@nextui-org/react"
+import NextLink from "next/link"
+import { useSelectedLayoutSegment } from "next/navigation"
+import TogglrLogo from "../components/TogglrLogo"
 
 const items = [
-  { href: 'flags', label: 'Flags' },
-  { href: 'users', label: 'Users' },
+  { href: "flags", label: "Flags" },
+  { href: "users", label: "Users" },
 ]
 
 export default function AdminNav() {
@@ -30,9 +30,9 @@ export default function AdminNav() {
         {items.map((item) => (
           <NavbarItem key={item.href} isActive={segment === item.href}>
             <Link
-              aria-current={segment === item.href ? 'page' : undefined}
+              aria-current={segment === item.href ? "page" : undefined}
               as={NextLink}
-              color={segment === item.href ? 'primary' : 'foreground'}
+              color={segment === item.href ? "primary" : "foreground"}
               href={`/${item.href}`}
             >
               {item.label}

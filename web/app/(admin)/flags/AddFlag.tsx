@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   Button,
   Modal,
@@ -9,10 +9,10 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react'
-import Submit from '../components/Submit'
-import { addFlag } from './actions'
-import AddFlagFields from './AddFlagFields'
+} from "@nextui-org/react"
+import Submit from "@/app/components/Submit"
+import { addFlag } from "./actions"
+import AddFlagFields from "./AddFlagFields"
 
 export default function AddFlag() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()

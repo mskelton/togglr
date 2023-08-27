@@ -5,6 +5,8 @@ specifiers:
   '@mskelton/eslint-config': ^8.2.1
   '@mskelton/req': ^1.0.3
   '@nextui-org/react': ^2.1.5
+  '@react-aria/interactions': ^3.17.0
+  '@react-aria/utils': ^3.19.0
   '@sindresorhus/slugify': ^2.2.1
   '@types/node': 20.5.4
   '@types/react': 18.2.21
@@ -32,6 +34,8 @@ dependencies:
   '@heroicons/react': 2.0.18_react@18.2.0
   '@mskelton/req': 1.0.3
   '@nextui-org/react': 2.1.5_jro7j3ilwp2feoeeuhgfvhwp7u
+  '@react-aria/interactions': 3.17.0_react@18.2.0
+  '@react-aria/utils': 3.19.0_react@18.2.0
   '@sindresorhus/slugify': 2.2.1
   '@types/node': 20.5.4
   '@types/react': 18.2.21

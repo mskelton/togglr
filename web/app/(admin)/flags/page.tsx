@@ -1,10 +1,10 @@
-import { Metadata } from 'next'
-import PageTitle from '@/app/components/PageTitle'
-import AddFlag from './AddFlag'
-import FlagList from './FlagList'
+import { Metadata } from "next"
+import PageTitle from "@/app/components/PageTitle"
+import AddFlag from "./AddFlag"
+import FlagList from "./FlagList"
 
 export const metadata: Metadata = {
-  title: 'Flags | Togglr',
+  title: "Flags | Togglr",
 }
 
 export default function Page() {
